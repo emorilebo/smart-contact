@@ -17,7 +17,6 @@ class Snake extends StatefulWidget {
   final double cellSize;
 
   @override
-  // ignore: no_logic_in_create_state
   State<StatefulWidget> createState() => SnakeState(rows, columns, cellSize);
 }
 
@@ -31,15 +30,15 @@ class SnakeBoardPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final blackLine = Paint()..color = Colors.black;
     final blackFilled = Paint()
-      ..color = Colors.black
-      ..style = PaintingStyle.fill;
+      ..color = Colors.green
+      ..style = PaintingStyle.stroke;
     canvas.drawRect(
       Rect.fromPoints(Offset.zero, size.bottomLeft(Offset.zero)),
       blackLine,
     );
     for (final p in state!.body) {
       final a = Offset(cellSize * p.x, cellSize * p.y);
-      final b = Offset(cellSize * (p.x + 1), cellSize * (p.y + 1));
+      final b = Offset(cellSize * (p.x + 3), cellSize * (p.y + 3));
 
       canvas.drawRect(Rect.fromPoints(a, b), blackFilled);
     }
@@ -84,7 +83,7 @@ class SnakeState extends State<Snake> {
       });
     });
 
-    _timer = Timer.periodic(const Duration(milliseconds: 200), (_) {
+    _timer = Timer.periodic(const Duration(milliseconds: 500), (_) {
       setState(() {
         _step();
       });
@@ -105,7 +104,7 @@ class SnakeState extends State<Snake> {
 
 class GameState {
   GameState(this.rows, this.columns) {
-    snakeLength = math.min(rows, columns) - 5;
+    snakeLength = math.min(rows, columns) - 3;
   }
 
   int rows;
