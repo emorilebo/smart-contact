@@ -92,7 +92,7 @@ void initState() {
       ),
       body: SingleChildScrollView(
         child: Column(
-          children: List.generate(1000, (index) {
+          children: List.generate(100, (index) {
             final value = index + 1;
             final isEven = value.isEven;
             return ListTile(
